@@ -42,6 +42,11 @@
     <Image Include="assets\images\background.jpg" />
     <Image Include="assets\images\plane.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="sfml-graphics-2.dll" />
+    <None Include="sfml-system-2.dll" />
+    <None Include="sfml-window-2.dll" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{508972B2-EEBF-4469-9C86-7BA76757C089}</ProjectGuid>

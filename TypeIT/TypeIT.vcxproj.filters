@@ -68,4 +68,9 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="sfml-graphics-2.dll" />
+    <None Include="sfml-system-2.dll" />
+    <None Include="sfml-window-2.dll" />
+  </ItemGroup>
 </Project>
