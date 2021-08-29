@@ -24,7 +24,6 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Plane.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="Word.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +31,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Plane.h" />
-    <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Word.h" />
   </ItemGroup>
   <ItemGroup>

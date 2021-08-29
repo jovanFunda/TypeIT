@@ -1,8 +1,17 @@
-#include <stdlib.h>
 #include <time.h>
 
 #include "Game.h"
 #include "Word.h"
+
+Word::Word()
+{
+	srand(time(NULL));
+	loadWord();
+	setPosition(Point2D(rand() % 650, 0));
+	startingX = this->getPosition().x;
+	startingY = this->getPosition().y;
+	m_text.setOrigin(m_text.getLocalBounds().width / 2, 0);
+}
 
 void Word::loadWord()
 {
@@ -13,39 +22,28 @@ void Word::loadWord()
 	this->m_text.setFont(m_font);
 }
 
-Word::Word()
-{
-	srand(time(NULL));
-	loadWord();
-	setPosition(Point2D(rand() % 650, 0.f));
-	startingX = this->getPosition().getX();
-	startingY = this->getPosition().getY();
-	m_text.setOrigin(m_text.getLocalBounds().width / 2, 0);
-}
-
 void Word::startMoving()
 {
 	sf::Time timer = m_clock.getElapsedTime();
 
 	if (timer.asSeconds() > 0.005f)
 	{
-		if (i == Game::getWordSpeed())
+		if (step == Game::getWordSpeed())
 		{
 			//GAME OVER
-			i = -1;
+			step = -1;
 			return;
 		}
 
-		i++;
-		this->setPosition(Math::pointBetween2Points(Point2D(this->startingX, this->startingY), Point2D(400.f, 800.f), i, Game::getWordSpeed()));
+		step++;
+		this->setPosition(Math::pointBetween2Points(Point2D(this->startingX, this->startingY), Point2D(400.f, 800.f), step, Game::getWordSpeed()));
 		m_clock.restart();
 	}
 }
 
-
 void Word::setPosition(Point2D point)
 {
-	m_text.setPosition(point.getX(), point.getY());
+	m_text.setPosition(point.x, point.y);
 }
 
 Point2D Word::getPosition()
@@ -63,4 +61,4 @@ std::string Word::getString()
 	return m_text.getString();
 }
 
-std::string Word::words[32] = { "flower", "footbal", "desk", "table", "karate", "bookshelf", "cocacola", "speaker", "telephone", "clock", "cloudy", "virtual", "monitor", "paper", "passport", "numbers", "sponge", "hamburger", "mcdonalds", "survey", "epidemic", "attitude", "antena", "windows", "linux", "cactus", "networking", "computer", "system", "algebra", "euclidian", "major"};
+std::string Word::words[32] = { "flower", "football", "desk", "table", "karate", "bookshelf", "cocacola", "speaker", "telephone", "clock", "cloudy", "virtual", "monitor", "paper", "passport", "numbers", "sponge", "hamburger", "mcdonalds", "survey", "epidemic", "attitude", "antena", "windows", "linux", "cactus", "networking", "computer", "system", "algebra", "euclidian", "major"};

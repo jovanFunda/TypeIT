@@ -6,10 +6,6 @@ public:
 
 	Point2D(float x, float y);
 	void setPosition(float x, float y);
-	float getX();
-	float getY();
-
-private:
 	float x, y;
 };
 
