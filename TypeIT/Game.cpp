@@ -10,15 +10,20 @@
 #include "Game.h"
 #include "Word.h"
 
+int screen_width = 800;
+int screen_height = 1000;
 int Game::m_wordSpeed;
-sf::RenderWindow Game::m_window(sf::VideoMode(800, 1000), "Keyboard racer", sf::Style::Titlebar | sf::Style::Close);
+sf::RenderWindow Game::m_window(sf::VideoMode(screen_width, screen_height), "Keyboard racer", sf::Style::Titlebar | sf::Style::Close);
 void setProperties(sf::Text&, sf::Color, Point2D);
 
 int Game::Run()
 {
 	Plane plane("assets/images/plane.png", Point2D(400.f, 850.f));
-	GameObject background("assets/images/background.jpg", Point2D(0, 0));
+	GameObject background1("assets/images/background.jpg", Point2D(0, 0));
+	GameObject background2("assets/images/background.jpg", Point2D(0, -1080));
+	
 	m_window.setFramerateLimit(100);
+
 
 	std::deque<Word*> words;
 
@@ -71,7 +76,19 @@ int Game::Run()
 			plane.rotateToWord(words.front());
 
 			m_window.clear(sf::Color::Black);
-			m_window.draw(background.sprite);
+			m_window.draw(background1.sprite);
+			m_window.draw(background2.sprite);
+
+			background1.sprite.setPosition(sf::Vector2f(background1.sprite.getPosition().x, background1.sprite.getPosition().y + 1));
+			background2.sprite.setPosition(sf::Vector2f(background2.sprite.getPosition().x, background2.sprite.getPosition().y + 1));
+
+			if (background1.sprite.getPosition().y > screen_height)
+				background1.sprite.setPosition(sf::Vector2f(0, -1080));
+
+			if (background2.sprite.getPosition().y > screen_height)
+				background2.sprite.setPosition(sf::Vector2f(0, -1080));
+
+
 			m_window.draw(plane.sprite);
 
 			for (int i = 0; i < words.size(); i++)
@@ -95,7 +112,8 @@ int Game::Run()
 			setProperties(finalText, sf::Color(200, 200, 255, 255), Point2D(230, 400));
 
 			m_window.clear(sf::Color::Black);
-			m_window.draw(background.sprite);
+			m_window.draw(background1.sprite);
+			m_window.draw(background2.sprite);
 			m_window.draw(finalText);
 
 			sf::Event event;
@@ -120,7 +138,7 @@ int Game::Run()
 
 		m_window.display();
 	}
-
+	
 	return 0;
 }
 

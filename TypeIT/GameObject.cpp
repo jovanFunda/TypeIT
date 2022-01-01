@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include <iostream>
 
 GameObject::GameObject(std::string path, Point2D position) 
 	: m_position(position)
