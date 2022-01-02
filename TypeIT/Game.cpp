@@ -10,6 +10,7 @@
 #include "Plane.h"
 #include "Game.h"
 #include "Word.h"
+#include "Math.h"
 
 int screen_width = 800;
 int screen_height = 1000;
@@ -32,7 +33,6 @@ int Game::Run()
 	Plane plane("assets/images/plane.png", Point2D(400.f, 850.f));
 	GameObject background1("assets/images/background.jpg", Point2D(0, 0));
 	GameObject background2("assets/images/background.jpg", Point2D(0, -1080));
-	
 	m_window.setFramerateLimit(100);
 
 	std::deque<Word*> words;
@@ -81,6 +81,7 @@ int Game::Run()
 						currentLetter++;
 						if (words.front()->getString()[currentLetter] == '\0')
 						{
+							// WORD FINISHED
 							Explosion* exp;
 							exp = new Explosion();
 							exp->sprite.setTexture(expTexture);
@@ -89,8 +90,6 @@ int Game::Run()
 							exp->timer.restart();
 
 							explosions.push_back(exp);
-
-							// WORD FINISHED
 							currentLetter = 0;
 							words.pop_front();
 							score++;
@@ -101,7 +100,18 @@ int Game::Run()
 
 			plane.rotateToWord(words.front());
 
+			
+
 			m_window.clear(sf::Color::Black);
+
+			float distanceWordToPlane = Math::lineLength(words.front()->getPosition(), Point2D(400.f, 850.f));
+			int maxBrightness = 200;
+
+			int brightness = maxBrightness - distanceWordToPlane / 900 * maxBrightness;
+
+			background1.sprite.setColor(sf::Color(256 - brightness, 256 - brightness, 256 - brightness));
+			background2.sprite.setColor(sf::Color(256 - brightness, 256 - brightness, 256 - brightness));
+
 			m_window.draw(background1.sprite);
 			m_window.draw(background2.sprite);
 
