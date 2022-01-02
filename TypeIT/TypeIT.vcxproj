@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\images\background.jpg" />
+    <Image Include="assets\images\explosion.png" />
     <Image Include="assets\images\plane.png" />
   </ItemGroup>
   <ItemGroup>
